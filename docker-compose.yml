@@ -16,19 +16,15 @@ services:
       - blog
 
   db:
-    image: mysql:latest
-    platform: linux/x86_64
+    image: postgres:latest
     container_name: blog-db
     restart: unless-stopped
     environment:
-        MYSQL_DATABASE: blog
-        MYSQL_ROOT_PASSWORD: root
-        SERVICE_TAGS: dev
-        SERVICE_NAME: mysql
-    volumes:
-      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+      POSTGRES_DB: "blog"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
     ports:
-        - "3306:3306"
+      - "5432:5432"
     networks:
       - blog
 
